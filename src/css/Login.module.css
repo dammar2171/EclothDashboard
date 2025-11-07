@@ -1,0 +1,47 @@
+
+.cardContainer {
+  padding: 0.5rem;
+}
+
+.glassCard {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.glassCard:hover {
+  transform: scale(1.02);
+}
+
+.formSection {
+  padding: 2rem;
+}
+
+.image {
+  height: 100%;
+  object-fit: cover;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.link {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.submitBtn {
+  margin-top: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+  background-color: #0056b3;
+}

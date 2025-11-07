@@ -1,0 +1,133 @@
+/* css for topbarDashboard component  */
+.costumAlert{
+  padding:0 2rem 0 2rem;
+  max-width: 90%;
+}
+.topIconGroup{
+  display: flex;
+  align-items: center;
+  float: right;
+  font-size: 1.5rem;
+  gap: 0.5rem;
+}
+
+
+/* Dashboard component css */
+.dashboardCard {
+  background-color: var(--bs-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.dashboardCard:hover {
+  transform: translateY(-3px);
+}
+
+.costumOverviewStatistics{
+  background-color: var(--bs-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+.dashboardCard p {
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.dashboardCard p:first-child {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--bs-primary);
+}
+
+.dashboardCard .numValue{
+  font-size: x-large;
+  font-weight: 700;
+}
+
+.dashboardCard span svg {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+
+.dashboardCard .growth {
+  color: green;
+  font-weight: 600;
+}
+.dashboardCard .costumer {
+  color: rgb(201, 134, 10);
+  font-weight: 600;
+}
+.dashboardCard .transaction {
+  color: rgb(170, 9, 28);
+  font-weight: 600;
+}
+.dashboardCard .product{
+  color: rgb(153, 210, 9);
+  font-weight: 600;
+}
+
+
+/* css for dashboard top container */
+.groupIcon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.groupIcon input[type="search"] {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.groupIcon input[type="search"]:focus {
+  border-color: #007bff;
+}
+
+.groupIcon span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.notification{
+  font-size: 1.5rem;
+}
+
+.groupIcon img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.costumRevenueGrowth{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.costumRevenueGrowth a{
+  text-decoration: none;
+}
+.costumOverviewTopProduct {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
