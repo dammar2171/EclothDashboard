@@ -1,78 +1,174 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNewProducts } from "../../store/productSlice";
+import { fetchNewProducts } from "../../store/newproductSlice";
+import { fetchFeaturedProducts } from "../../store/featuredproductSlice";
 import style from "../../css/Product.module.css";
+import ProductTable from "./ProductTable";
 
 function ProductContainer() {
   const dispatch = useDispatch();
-  const { items, status, error } = useSelector((state) => state.products);
+  const {
+    items: newItems,
+    status: newStatus,
+    error: newError,
+  } = useSelector((state) => state.newproducts);
+
+  const {
+    items: featuredItems,
+    status: featuredStatus,
+    error: featuredError,
+  } = useSelector((state) => state.featuredProducts);
 
   useEffect(() => {
-    if (status === "idle") {
+    if (newStatus === "idle") {
       dispatch(fetchNewProducts());
     }
-  }, [status, dispatch]);
+  }, [newStatus, dispatch]);
 
-  if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
+  if (newStatus === "loading") return <p>Loading...</p>;
+  if (newStatus === "failed") return <p>Error: {newError}</p>;
+
+  useEffect(() => {
+    if (featuredStatus === "idle") {
+      dispatch(fetchFeaturedProducts());
+    }
+  }, [featuredStatus, dispatch]);
+
+  if (featuredStatus === "loading") return <p>Loading...</p>;
+  if (featuredStatus === "failed") return <p>Error: {featuredError}</p>;
 
   return (
-    <div className={`${style.costumContainer}`}>
-      <div className="d-flex align-items-center justify-content-between mb-3">
-        <h5 className="mb-0">Top Products</h5>
-        <button className="btn btn-primary">Add New Products</button>
-      </div>
+    <>
+      <nav>
+        <div className="nav nav-tabs" id="nav-tab" role="tablist">
+          <button
+            className="nav-link active"
+            id="nav-topProducts-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-topProducts"
+            type="button"
+            role="tab"
+            aria-controls="nav-topProducts"
+            aria-selected="true"
+          >
+            Top Products
+          </button>
+          <button
+            className="nav-link"
+            id="nav-featured-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-featured"
+            type="button"
+            role="tab"
+            aria-controls="nav-featured"
+            aria-selected="false"
+          >
+            Featured Products
+          </button>
+          <button
+            className="nav-link"
+            id="nav-top-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-top"
+            type="button"
+            role="tab"
+            aria-controls="nav-top"
+            aria-selected="false"
+          >
+            Top
+          </button>
+          <button
+            className="nav-link"
+            id="nav-bottom-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-bottom"
+            type="button"
+            role="tab"
+            aria-controls="nav-bottom"
+            aria-selected="false"
+          >
+            Bottom
+          </button>
+          <button
+            className="nav-link"
+            id="nav-access-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#access"
+            type="button"
+            role="tab"
+            aria-controls="nav-access"
+            aria-selected="false"
+          >
+            Accessories
+          </button>
+        </div>
+      </nav>
+      <div className="tab-content" id="nav-tabContent">
+        <div
+          className="tab-pane fade show active"
+          id="nav-topProducts"
+          role="tabpanel"
+          aria-labelledby="nav-topProducts-tab"
+          tabIndex={0}
+        >
+          <div className={`${style.costumContainer} mt-3`}>
+            <div className="d-flex align-items-center justify-content-between mb-3">
+              <h5 className="mb-0">Products</h5>
+              <button className="btn btn-primary">Add New Products</button>
+            </div>
 
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover align-middle">
-          <thead className="table-light">
-            <tr>
-              <th>Product Name</th>
-              <th>Category</th>
-              <th>Id</th>
-              <th>Price</th>
-              <th>Creater</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((product) => (
-              <tr key={product.id}>
-                <td>
-                  <div className="d-flex align-items-center gap-2">
-                    <img
-                      src={product.pimage}
-                      alt={product.pName}
-                      className={style.productImage}
-                    />
-                    <div>
-                      <h6 className="mb-0">{product.pName}</h6>
-                      <small className="text-muted">
-                        {product.description}
-                      </small>
-                    </div>
-                  </div>
-                </td>
-                <td>{product.category}</td>
-                <td>{product.id}</td>
-                <td>
-                  <span className="fw-bold text-success">
-                    Rs {product.sPrice}
-                  </span>
-                </td>
-                <td>{product.pCreater}</td>
-                <td>Sucess</td>
-                <td>
-                  <button className="btn btn-sm btn-success me-2">Edit</button>
-                  <button className="btn btn-sm btn-danger">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <div className="table-responsive">
+              <ProductTable items={newItems} />
+            </div>
+          </div>{" "}
+        </div>
+        <div
+          className="tab-pane fade"
+          id="nav-featured"
+          role="tabpanel"
+          aria-labelledby="nav-featured-tab"
+          tabIndex={0}
+        >
+          <div className={`${style.costumContainer} mt-3`}>
+            <div className="d-flex align-items-center justify-content-between mb-3">
+              <h5 className="mb-0">Products</h5>
+              <button className="btn btn-primary">Add New Products</button>
+            </div>
+
+            <div className="table-responsive">
+              <ProductTable items={featuredItems} />
+            </div>
+          </div>{" "}
+        </div>
+        <div
+          className="tab-pane fade"
+          id="nav-top"
+          role="tabpanel"
+          aria-labelledby="nav-top-tab"
+          tabIndex={0}
+        >
+          ...
+        </div>
+        <div
+          className="tab-pane fade"
+          id="nav-bottom"
+          role="tabpanel"
+          aria-labelledby="nav-bottom-tab"
+          tabIndex={0}
+        >
+          ...
+        </div>
+        <div
+          className="tab-pane fade"
+          id="nav-access"
+          role="tabpanel"
+          aria-labelledby="nav-access-tab"
+          tabIndex={0}
+        >
+          accessories
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

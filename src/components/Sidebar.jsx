@@ -36,18 +36,20 @@ const Sidebar = () => {
 
   return (
     <div
-      className="d-flex flex-column flex-shrink-0 p-3 pt-5 bg-body-tertiary"
+      className="d-flex flex-column flex-shrink-0 p-3 py-5 bg-body-tertiary"
       style={{ width: 200 }}
     >
-      <img
-        src={logo}
-        alt="Logo"
-        width={80}
-        style={{
-          marginLeft: "2rem",
-          marginBottom: "1rem",
-        }}
-      />
+      <NavLink to={"/dashboard"}>
+        <img
+          src={logo}
+          alt="Logo"
+          width={80}
+          style={{
+            marginLeft: "2rem",
+            marginBottom: "1rem",
+          }}
+        />
+      </NavLink>
 
       <hr />
       <ul className="nav nav-pills flex-column mb-4">

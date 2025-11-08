@@ -7,6 +7,7 @@ import { LuChartLine } from "react-icons/lu";
 import { IoNotifications } from "react-icons/io5";
 import Statistic from "../components/Statistic";
 import OverViewProductCard from "../components/OverViewProductCard";
+import { NavLink } from "react-router";
 
 const Dashboard = () => {
   return (
@@ -110,7 +111,7 @@ const Dashboard = () => {
           <div className={`${style.costumRevenueGrowth}`}>
             <h6>Revenue Growth(NPR)</h6>
             <span>
-              <a href="#">View more</a>
+              <NavLink to={"/statistics"}>View more</NavLink>
             </span>
           </div>
           <Statistic />
@@ -120,7 +121,7 @@ const Dashboard = () => {
           <div className={`${style.costumRevenueGrowth}`}>
             <h6>Top Products</h6>
             <span>
-              <a href="#">View more</a>
+              <NavLink to="/products">View more</NavLink>
             </span>
           </div>
           <div className={`${style.costumOverviewTopProduct}`}>
