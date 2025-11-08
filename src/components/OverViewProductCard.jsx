@@ -1,4 +1,3 @@
-import profile from "../assets/profile.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 function OverViewProductCard() {

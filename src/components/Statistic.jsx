@@ -9,7 +9,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useState } from "react";
-import style from "../css/Statistic.module.css";
+import { useLocation } from "react-router";
 
 ChartJS.register(
   CategoryScale,
@@ -22,6 +22,7 @@ ChartJS.register(
 
 const Statistic = () => {
   const [view, setView] = useState("monthly");
+  const location = useLocation();
 
   const monthlyData = {
     labels: [
@@ -74,8 +75,10 @@ const Statistic = () => {
     },
   };
 
+  const currentData = view === "monthly" ? monthlyData : yearlyData;
+
   return (
-    <div className={`py-3 w-100 `}>
+    <div className={`py-3 w-100`}>
       <div className="d-flex justify-content-end mb-3">
         <button
           className={`btn btn-sm me-2 ${
@@ -94,10 +97,40 @@ const Statistic = () => {
           Yearly
         </button>
       </div>
-      <Bar
-        data={view === "monthly" ? monthlyData : yearlyData}
-        options={options}
-      />
+
+      <Bar data={currentData} options={options} />
+
+      {location.pathname === "/statistics" && (
+        <div className="mt-4">
+          <h6>
+            {view === "monthly"
+              ? "Monthly Revenue Table"
+              : "Yearly Revenue Table"}
+          </h6>
+          <div className="table-responsive">
+            <table className="table table-striped table-bordered">
+              <thead className="table-light">
+                <tr>
+                  <th className="text-center">
+                    {view === "monthly" ? "Month" : "Year"}
+                  </th>
+                  <th className="text-center">Revenue (Rs)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentData.labels.map((label, index) => (
+                  <tr key={label}>
+                    <td className="text-center">{label}</td>
+                    <td className="text-center">
+                      {currentData.datasets[0].data[index]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

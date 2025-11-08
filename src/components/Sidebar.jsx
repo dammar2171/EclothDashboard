@@ -36,7 +36,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="d-flex flex-column flex-shrink-0 p-3 pb-5 pt-5 bg-body-tertiary"
+      className="d-flex flex-column flex-shrink-0 p-3 pt-5 bg-body-tertiary"
       style={{ width: 200 }}
     >
       <img
@@ -104,10 +104,10 @@ const Sidebar = () => {
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link link-body-emphasis">
+          <NavLink to="/statistics" className="nav-link link-body-emphasis">
             <BsGraphUpArrow className="me-2" />
             Statistics
-          </a>
+          </NavLink>
         </li>
       </ul>
       <hr />

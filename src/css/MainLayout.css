@@ -1,0 +1,21 @@
+.main-layout {
+  height: calc(100vh); 
+  overflow: hidden;
+}
+
+.sidebar-fixed {
+  width: 250px;
+  min-width: 250px;
+  height: 100%;
+  position: sticky;
+  top: 56px; 
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  z-index: 100;
+}
+
+.content-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 16px;
+}

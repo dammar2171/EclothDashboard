@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import MainLayout from "./layouts/MainLayout";
 import Product from "./pages/Product";
 import Costumer from "./pages/Costumer";
+import Statistics from "./pages/Statistics";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
           element={
             <MainLayout>
               <Costumer />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/statistics"
+          element={
+            <MainLayout>
+              <Statistics />
             </MainLayout>
           }
         />
