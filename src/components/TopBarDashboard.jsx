@@ -11,7 +11,7 @@ const TopBarDashboard = () => {
   return (
     <div className="container-fluid pt-3">
       <div className="row">
-        <div className="col-3 d-flex">
+        <div className="col-4 d-flex">
           <div className="d-flex gap-2 align-items-center">
             <FaCircle style={{ color: "orange" }} />
             <FaCircle style={{ color: "#c4aa2aff" }} />
@@ -34,7 +34,7 @@ const TopBarDashboard = () => {
             dashboard.io
           </div>
         </div>
-        <div className="col-3">
+        <div className="col-2">
           <div className={`${style.topIconGroup}`}>
             <BiSolidCloudUpload />
             <IoMdAdd />

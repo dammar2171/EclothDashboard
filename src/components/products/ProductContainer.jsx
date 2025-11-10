@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNewProducts } from "../../store/newproductSlice";
 import { fetchFeaturedProducts } from "../../store/featuredproductSlice";
@@ -12,6 +12,7 @@ function ProductContainer() {
     status: newStatus,
     error: newError,
   } = useSelector((state) => state.newproducts);
+  const [showModal, setShowModal] = useState(false);
 
   const {
     items: featuredItems,
@@ -36,6 +37,10 @@ function ProductContainer() {
 
   if (featuredStatus === "loading") return <p>Loading...</p>;
   if (featuredStatus === "failed") return <p>Error: {featuredError}</p>;
+
+  const handleAddProduct = () => {
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -114,11 +119,18 @@ function ProductContainer() {
           <div className={`${style.costumContainer} mt-3`}>
             <div className="d-flex align-items-center justify-content-between mb-3">
               <h5 className="mb-0">Products</h5>
-              <button className="btn btn-primary">Add New Products</button>
+              <button onClick={handleAddProduct} className="btn btn-primary">
+                Add New Products
+              </button>
             </div>
 
             <div className="table-responsive">
-              <ProductTable items={newItems} />
+              <ProductTable
+                items={newItems}
+                setShowModal={setShowModal}
+                show={showModal}
+                source={"newproducts"}
+              />
             </div>
           </div>{" "}
         </div>
@@ -132,11 +144,18 @@ function ProductContainer() {
           <div className={`${style.costumContainer} mt-3`}>
             <div className="d-flex align-items-center justify-content-between mb-3">
               <h5 className="mb-0">Products</h5>
-              <button className="btn btn-primary">Add New Products</button>
+              <button onClick={handleAddProduct} className="btn btn-primary">
+                Add New Products
+              </button>
             </div>
 
             <div className="table-responsive">
-              <ProductTable items={featuredItems} />
+              <ProductTable
+                items={featuredItems}
+                source={"featuredproducts"}
+                setShowModal={setShowModal}
+                show={showModal}
+              />
             </div>
           </div>{" "}
         </div>

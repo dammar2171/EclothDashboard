@@ -1,4 +1,9 @@
+import CustomerContainer from "../components/customer/CustomerContainer";
 const Costumer = () => {
-  return <>hello costumer</>;
+  return (
+    <>
+      <CustomerContainer />
+    </>
+  );
 };
 export default Costumer;

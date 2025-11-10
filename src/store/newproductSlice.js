@@ -16,7 +16,20 @@ const newproductSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    addProduct:(state,action)=>{
+      const {product,source}=action.payload;
+       if (source === 'newproducts') {
+        state.items.push(product);
+       }
+    },
+    removeProduct: (state, action) => {
+    const { id, source } = action.payload;
+  if (source === 'newproducts') {
+    state.items = state.items.filter((item) => item.id !== id);
+  }
+}
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchNewProducts.pending, state => {
@@ -32,5 +45,5 @@ const newproductSlice = createSlice({
       });
   },
 });
-
+export const {addProduct,removeProduct} = newproductSlice.actions;
 export default newproductSlice.reducer;
