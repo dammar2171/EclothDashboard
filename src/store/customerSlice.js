@@ -15,7 +15,20 @@ const costumerSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers:{},
+  reducers:{
+    removeCustomer:(state,action)=>{
+      state.items = state.items.filter((item)=> item.id !== action.payload);
+    },
+    updateCustomer: (state, action) => {
+      const updated = action.payload;
+      const index = state.items.findIndex((item) => item.id === updated.id);
+      if (index !== -1) {
+        state.items[index] = { ...state.items[index], ...updated };
+      } else {
+        state.items.push(updated);
+      }
+    }
+  },
   extraReducers: builder => {
       builder
         .addCase(fetchCostumers.pending, state => {
@@ -31,4 +44,5 @@ const costumerSlice = createSlice({
         });
       }
 })
+export const {removeCustomer,updateCustomer} =costumerSlice.actions;
 export default costumerSlice.reducer;

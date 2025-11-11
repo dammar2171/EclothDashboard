@@ -17,22 +17,31 @@ const newproductSlice = createSlice({
     error: null,
   },
   reducers: {
-    addProduct:(state,action)=>{
-      const {product,source}=action.payload;
-       if (source === 'newproducts') {
+    addProduct: (state, action) => {
+      const { product, source } = action.payload;
+      if (source === 'newproducts') {
         state.items.push(product);
-       }
+      }
     },
     removeProduct: (state, action) => {
-    const { id, source } = action.payload;
-  if (source === 'newproducts') {
-    state.items = state.items.filter((item) => item.id !== id);
-  }
-}
+      const { id, source } = action.payload;
+      if (source === 'newproducts') {
+        state.items = state.items.filter((item) => item.id !== id);
+      }
+    },
+    updateProduct: (state, action) => {
+      const { product, source } = action.payload;
+      if (source === 'newproducts') {
+        const index = state.items.findIndex((item) => item.id === product.id);
+        if (index !== -1) {
+          state.items[index] = product;
+        }
+      }
+    },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchNewProducts.pending, state => {
+      .addCase(fetchNewProducts.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchNewProducts.fulfilled, (state, action) => {
@@ -45,5 +54,6 @@ const newproductSlice = createSlice({
       });
   },
 });
-export const {addProduct,removeProduct} = newproductSlice.actions;
+
+export const { addProduct, removeProduct, updateProduct } = newproductSlice.actions;
 export default newproductSlice.reducer;

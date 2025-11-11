@@ -19,14 +19,12 @@ import { NavLink } from "react-router";
 const Sidebar = () => {
   const [theme, setTheme] = useState("light");
 
-  // Load saved theme on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-bs-theme", savedTheme);
   }, []);
 
-  // Toggle theme when Mode button is clicked
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
@@ -114,10 +112,6 @@ const Sidebar = () => {
       </ul>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <span className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <BsBoxArrowInRight size={20} className="me-2" />
-          <span className="fs-6">Support</span>
-        </span>
         <li>
           <a href="#" className="nav-link link-body-emphasis">
             <BsGear className="me-2" />

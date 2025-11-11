@@ -83,6 +83,7 @@ function ProductTable({ items, source, show, setShowModal }) {
       </table>
       {myModal && (
         <ProductModal
+          source={source}
           selectedProduct={selectedProduct}
           setSelectedProduct={setSelectedProduct}
           setMyModal={setMyModal}
