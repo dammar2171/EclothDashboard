@@ -41,8 +41,8 @@ function CustomerTable({ items }) {
           {items.map((customer, index) => (
             <tr key={index}>
               <td>{customer.id}</td>
-              <td>{customer.costumerName}</td>
-              <td>{customer.costumerEmail}</td>
+              <td>{customer.customerName}</td>
+              <td>{customer.customerEmail}</td>
               <td>{customer.paymentStatus}</td>
               <td>{customer.tAmount}</td>
               <td>{customer.dueDate}</td>
