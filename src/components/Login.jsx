@@ -3,12 +3,15 @@ import axios from "axios";
 import image from "../assets/makima.jpg";
 import style from "../css/Login.module.css";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { login, logout } from "../store/loginSlice";
 
 const Login = () => {
   const [adminFetchData, setAdminFetchData] = useState([]);
 
   const [error, setError] = useState("");
-
+  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
 
   const emailElement = useRef();
@@ -32,8 +35,10 @@ const Login = () => {
     const admin = adminFetchData[0];
 
     if (admin && email === admin.email && password === admin.password) {
+      dispatch(login(admin));
       navigate("/dashboard");
     } else {
+      dispatch(logout());
       setError("Invalid email or password");
     }
   };

@@ -7,18 +7,20 @@ import MainLayout from "./layouts/MainLayout";
 import Product from "./pages/Product";
 import Costumer from "./pages/Costumer";
 import Statistics from "./pages/Statistics";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-
         <Route
           path="/dashboard"
           element={
             <MainLayout>
-              <Dashboard />
+              <ProtectedRoutes>
+                <Dashboard />
+              </ProtectedRoutes>
             </MainLayout>
           }
         />
@@ -26,7 +28,9 @@ function App() {
           path="/products"
           element={
             <MainLayout>
-              <Product />
+              <ProtectedRoutes>
+                <Product />
+              </ProtectedRoutes>
             </MainLayout>
           }
         />
@@ -34,7 +38,9 @@ function App() {
           path="/costumers"
           element={
             <MainLayout>
-              <Costumer />
+              <ProtectedRoutes>
+                <Costumer />
+              </ProtectedRoutes>
             </MainLayout>
           }
         />
@@ -42,7 +48,9 @@ function App() {
           path="/statistics"
           element={
             <MainLayout>
-              <Statistics />
+              <ProtectedRoutes>
+                <Statistics />
+              </ProtectedRoutes>
             </MainLayout>
           }
         />
