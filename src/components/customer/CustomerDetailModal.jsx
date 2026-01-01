@@ -25,11 +25,11 @@ const CustomerDetailModal = ({ setShowDetail, customer }) => {
                 </div>
                 <div className="detail-item">
                   <span className="label">Name:</span>
-                  <span className="value">{customer.costumerName}</span>
+                  <span className="value">{customer.customerName}</span>
                 </div>
                 <div className="detail-item">
                   <span className="label">Email:</span>
-                  <span className="value">{customer.costumerEmail}</span>
+                  <span className="value">{customer.customerEmail}</span>
                 </div>
                 <div className="detail-item">
                   <span className="label">Status:</span>
