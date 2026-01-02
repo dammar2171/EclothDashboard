@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../store/newproductSlice";
+import axios from "axios";
 
 function AddProductModal({ setShowModal, source }) {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function AddProductModal({ setShowModal, source }) {
     setShowModal(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const pCreater = pCreaterRef.current?.value?.trim() ?? "";
     const pName = pNameRef.current?.value?.trim() ?? "";
@@ -44,10 +45,7 @@ function AddProductModal({ setShowModal, source }) {
     const savedPrice =
       savedPriceRaw !== "" ? Number(savedPriceRaw) : mPrice - sPrice;
 
-    const id = Date.now();
-
     const product = {
-      id,
       type,
       pCreater,
       pName,
@@ -64,9 +62,19 @@ function AddProductModal({ setShowModal, source }) {
       },
       pimage,
     };
-
-    dispatch(addProduct({ product, source }));
-    setShowModal(false);
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/product/insertProduct",
+        product,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      dispatch(addProduct({ product, source }));
+      setShowModal(false);
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
   return (

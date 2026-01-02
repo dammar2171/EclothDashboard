@@ -2,10 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchNewProducts = createAsyncThunk(
-  'products/fetchNewProducts',
+  'products/fetchFeaturedProducts',
   async () => {
-    const response = await axios.get('/api/newProducts');
-    return response.data;
+    const response = await axios.get("http://localhost:5000/product/fetchProducts",{
+      headers:{
+        Authorization:`Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response.data.data;
   }
 );
 
@@ -46,7 +50,7 @@ const newproductSlice = createSlice({
       })
       .addCase(fetchNewProducts.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.items = action.payload;
+        state.items = action.payload.filter(items => items.type === "NewArrival");
       })
       .addCase(fetchNewProducts.rejected, (state, action) => {
         state.status = 'failed';

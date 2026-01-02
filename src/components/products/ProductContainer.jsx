@@ -36,7 +36,9 @@ function ProductContainer() {
   }, [featuredStatus, dispatch]);
 
   if (featuredStatus === "loading") return <p>Loading...</p>;
-  if (featuredStatus === "failed") return <p>Error: {featuredError}</p>;
+  if (featuredStatus === "failed") {
+    <p>Error: {featuredError}</p>;
+  }
 
   const handleAddProduct = () => {
     setShowModal(true);

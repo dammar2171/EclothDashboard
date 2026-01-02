@@ -4,8 +4,12 @@ import axios from 'axios';
 export const fetchFeaturedProducts = createAsyncThunk(
   'products/fetchFeaturedProducts',
   async () => {
-    const response = await axios.get('/api/product');
-    return response.data;
+    const response = await axios.get("http://localhost:5000/product/fetchProducts",{
+      headers:{
+        Authorization:`Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response.data.data;
   }
 );
 
@@ -46,7 +50,7 @@ name: 'newproducts',
         })
         .addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
           state.status = 'succeeded';
-          state.items = action.payload;
+          state.items = action.payload.filter(items=>items.type==="Featured");
         })
         .addCase(fetchFeaturedProducts.rejected, (state, action) => {
           state.status = 'failed';

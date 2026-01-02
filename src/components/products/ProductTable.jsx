@@ -3,6 +3,7 @@ import style from "../../css/Product.module.css";
 import { removeProduct } from "../../store/newproductSlice";
 import ProductModal from "./ProductModal";
 import AddProductModal from "./AddProductModal";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 
 function ProductTable({ items, source, show, setShowModal }) {
@@ -14,8 +15,17 @@ function ProductTable({ items, source, show, setShowModal }) {
     setMyModal(true);
   };
 
-  const handleDelete = (id, source) => {
-    dispatch(removeProduct({ id, source }));
+  const handleDelete = async (id, source) => {
+    try {
+      axios.delete(`http://localhost:5000/product/deleteProduct/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      dispatch(removeProduct({ id, source }));
+    } catch (error) {
+      console.log("Deletion error:", error);
+    }
   };
 
   return (
