@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../../store/newproductSlice";
+import axios from "axios";
 
 function ProductModal({
   selectedProduct,
@@ -28,14 +29,29 @@ function ProductModal({
     setFormData((prev) => ({ ...prev, [name]: val }));
   };
 
-  const handleEditForm = (e) => {
+  const handleEditForm = async (e) => {
     e.preventDefault();
     const updatedProduct = {
       ...formData,
       savedPrice: formData.mPrice - formData.sPrice,
     };
-    dispatch(updateProduct({ product: updatedProduct, source }));
-    handleCloseModal();
+
+    try {
+      await axios.put(
+        "http://localhost:5000/product/updateProduct",
+        updatedProduct,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      dispatch(updateProduct({ product: updatedProduct, source }));
+      handleCloseModal();
+    } catch (error) {
+      console.log("UPDATION_ERROR:", error);
+      alert("Update failed");
+    }
   };
 
   return (
